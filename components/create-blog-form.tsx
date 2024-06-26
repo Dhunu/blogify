@@ -44,7 +44,7 @@ export default function CreateBlogForm({
             "slug",
             form.getValues("title").toLowerCase().replace(/\s/g, "-")
         );
-    }, [form.watch("title")]);
+    }, [form.watch("title"), form]);
 
     const onSubmit = (values: z.infer<typeof CreateBlogSchema>) => {
         console.log(values);

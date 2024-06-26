@@ -41,7 +41,7 @@ import {
     GrTextAlignCenter,
     GrTextAlignFull,
 } from "react-icons/gr";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 
 const MenuBar = () => {
@@ -51,13 +51,13 @@ const MenuBar = () => {
         return null;
     }
 
-    const addImage = useCallback(() => {
+    const addImage = () => {
         const url = window.prompt("URL");
 
         if (url) {
             editor.chain().focus().setImage({ src: url }).run();
         }
-    }, [editor]);
+    };
 
     return (
         <div className="w-full flex flex-wrap items-center justify-between lg:justify-start gap-5 border rounded-md py-2 px-5 rounded-b-none relative border-b-neutral-600 bg-black z-30">
