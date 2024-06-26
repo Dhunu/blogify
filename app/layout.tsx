@@ -1,9 +1,26 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {
+    Poppins,
+    Fira_Sans_Extra_Condensed as FiraSans,
+} from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
+
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+    subsets: ["latin"],
+    variable: "--font-poppins",
+    weight: ["400", "500", "600", "700"],
+});
+
+const firaSans = FiraSans({
+    subsets: ["latin"],
+    variable: "--font-fira-sans",
+    weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://blogify.angelsaikia.com/"),
@@ -33,17 +50,40 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="light"
-                    enableSystem
-                    disableTransitionOnChange
+        <ClerkProvider>
+            <html lang="en" className="scroll-smooth">
+                <body
+                    className={cn(
+                        "min-h-screen bg-background font-sans antialiased",
+                        poppins.variable,
+                        firaSans.variable
+                    )}
                 >
-                    {children}
-                </ThemeProvider>
-            </body>
-        </html>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="light"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        <NextTopLoader
+                            color={"#16a249"}
+                            initialPosition={0.08}
+                            crawlSpeed={200}
+                            height={3}
+                            crawl={true}
+                            easing="ease"
+                            speed={200}
+                            shadow="0 0 10px #16a249,0 0 5px #16a249"
+                            template='<div class="bar" role="bar"><div class="peg"></div></div> 
+  <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
+                            zIndex={1600}
+                            showAtBottom={false}
+                            showSpinner={false}
+                        />
+                        {children}
+                    </ThemeProvider>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }

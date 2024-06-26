@@ -13,27 +13,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    String  @id @default(cuid()) @map("_id")
-  email String  @unique
-  name  String?
+model Blog {
+  id        String  @id @default(cuid()) @map("_id")
+  slug      String  @unique
+  title     String
+  content   String
+  authorId  String
+  published Boolean @default(false)
 
-  blogs Blog[]
+  noOfLikes Int    @default(0)
+  likes     Like[]
+
+  noOfComments Int       @default(0)
+  comments     Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Blog {
-  id        String  @id @default(cuid()) @map("_id")
-  title     String
-  content   String
-  published Boolean
+model Like {
+  id String @id @default(cuid()) @map("_id")
 
-  author   User   @relation(fields: [authorId], references: [id])
+  blog   Blog   @relation(fields: [blogId], references: [id])
+  blogId String
+
   authorId String
-
-  comments Comment[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -45,6 +49,8 @@ model Comment {
 
   blog   Blog   @relation(fields: [blogId], references: [id])
   blogId String
+
+  authorId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

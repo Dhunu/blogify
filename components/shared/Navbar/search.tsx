@@ -25,7 +25,7 @@ export default function Search() {
             <Input
                 ref={inputRef}
                 placeholder="Search"
-                className="w-full focus-visible:ring-offset-0 focus-visible:ring-slate-300 selection:bg-neutral-400 selection:text-white "
+                className="w-full focus-visible:ring-offset-0  selection:bg-neutral-400 selection:text-white "
             />
             <div className="absolute right-2 text-sm text-muted-foreground group-focus-within:opacity-0 transition-all">
                 Ctrl + /
