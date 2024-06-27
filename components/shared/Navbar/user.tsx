@@ -1,4 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "@/components/ui/theme-switcher";
 import { UserButton } from "@clerk/nextjs";
@@ -13,18 +12,23 @@ export default function User() {
             <ThemeSwitcher />
             {userId ? (
                 <>
-                    <Link href="/create-blog">
-                        <Button>Create Blog</Button>
+                    <Link
+                        href="/create-blog"
+                        className="w-full flex items-center"
+                    >
+                        <Button size="sm">Create Blog</Button>
                     </Link>
                     <UserButton />
                 </>
             ) : (
                 <>
                     <Link href="/sign-in">
-                        <Button variant="outline">Sign In</Button>
+                        <Button variant="outline" size="sm">
+                            Sign In
+                        </Button>
                     </Link>
                     <Link href="/create-blog">
-                        <Button>Create Blog</Button>
+                        <Button size="sm">Create Blog</Button>
                     </Link>
                 </>
             )}

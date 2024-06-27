@@ -45,7 +45,7 @@ export default function RecentBlogs() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4  gap-5 lg:gap-10">
             {blogs.map((blog: Blog) => (
                 <Link
-                    href={`/blog/${blog.id}`}
+                    href={`/blog/${blog.slug}`}
                     key={blog.id}
                     className="bg-muted shadow-md p-5 rounded-md h-24"
                 >
