@@ -4,9 +4,12 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 export default async function Blog({ params }: { params: { slug: string } }) {
     const { slug } = params;
 
-    const res = await fetch(`http://localhost:3000/api/get-blog/${slug}`, {
-        method: "GET",
-    });
+    const res = await fetch(
+        `${process.env.DEPLOYMENT_URL}/api/get-blog/${slug}`,
+        {
+            method: "GET",
+        }
+    );
 
     const data = await res.json();
     const markdown = data.blog.content;
