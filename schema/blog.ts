@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const CreateBlogSchema = z.object({
+    slug: z.string().min(3).max(100),
     title: z
         .string()
         .min(3, {
@@ -9,7 +10,9 @@ export const CreateBlogSchema = z.object({
         .max(100, {
             message: "Title must be at most 100 characters",
         }),
-    slug: z.string().min(3).max(100),
+    description: z.string().max(200, {
+        message: "Description must be at most 200 characters",
+    }),
     content: z.string().min(10, {
         message: "Content must be at least 10 characters",
     }),

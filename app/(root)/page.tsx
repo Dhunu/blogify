@@ -3,35 +3,29 @@ import PopularBlogs from "@/components/popular-blogs";
 import RecentBlogs from "@/components/recent-blogs";
 
 export default async function Home() {
-    const res1 = await fetch(
-        `${process.env.DEPLOYMENT_URL}/api/public/get-recent-blogs`,
-        {
-            method: "GET",
-        }
+    // Fetch recent blogs
+    const recentRes = await fetch(
+        `${process.env.DEPLOYMENT_URL}/api/blogs/recent`,
+        { method: "GET" }
     );
+    const recentData = await recentRes.json();
+    const recentBlogs = recentData.blogs;
 
-    const data1 = await res1.json();
-    const recentBlogs = data1.blogs;
-
-    const res2 = await fetch(
-        `${process.env.DEPLOYMENT_URL}/api/public/get-popular-blogs`,
-        {
-            method: "GET",
-        }
+    // Fetch popular blogs
+    const popularRes = await fetch(
+        `${process.env.DEPLOYMENT_URL}/api/blogs/top`,
+        { method: "GET" }
     );
+    const popularData = await popularRes.json();
+    const popularBlogs = popularData.blogs;
 
-    const data2 = await res2.json();
-    const popularBlogs = data2.blogs;
+    // Fetch all blogs
+    const allRes = await fetch(`${process.env.DEPLOYMENT_URL}/api/blogs`, {
+        method: "GET",
+    });
 
-    const res3 = await fetch(
-        `${process.env.DEPLOYMENT_URL}/api/public/get-all-blogs`,
-        {
-            method: "GET",
-        }
-    );
-
-    const data3 = await res3.json();
-    const allBlogs = data3.blogs;
+    const allData = await allRes.json();
+    const allBlogs = allData.blogs;
 
     return (
         <main className="mt-10 flex flex-col gap-10">

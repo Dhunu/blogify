@@ -14,7 +14,7 @@ import {
     FormLabel,
 } from "@/components/ui/form";
 import { Input } from "./ui/input";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { Label } from "./ui/label";
 import BlogEditor from "./blog-editor";
 import { Button } from "./ui/button";
@@ -34,6 +34,7 @@ export default function CreateBlogForm({
         resolver: zodResolver(CreateBlogSchema),
         defaultValues: {
             title: blog?.title ?? "",
+            description: blog?.description ?? "",
             slug: blog?.slug ?? "",
             content: blog?.content ?? "",
         },
@@ -50,7 +51,7 @@ export default function CreateBlogForm({
         console.log(values);
 
         startTransition(async () => {
-            const res = await fetch("/api/create-blog", {
+            const res = await fetch("/api/blog", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,6 +101,22 @@ export default function CreateBlogForm({
                                     <Input
                                         {...field}
                                         placeholder="Title"
+                                        type="text"
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        name="description"
+                        control={form.control}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Description</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        placeholder="Description"
                                         type="text"
                                     />
                                 </FormControl>

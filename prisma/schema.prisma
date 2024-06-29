@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,16 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Blog {
-  id        String  @id @default(cuid()) @map("_id")
-  slug      String  @unique
-  title     String
-  content   String
-  published Boolean @default(false)
+model User {
+  id       String @id @default(cuid()) @map("_id")
+  email    String @unique
+  name     String
+  password String
+  image    String
+  bio      String
+  role     String @default("USER")
 
-  authorId   String
-  authorName String
-  authorImg  String
+  blogs    Blog[]
+  likes    Like[]
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Blog {
+  id          String  @id @default(cuid()) @map("_id")
+  slug        String  @unique
+  title       String
+  description String
+  content     String
+  published   Boolean @default(false)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   noOfLikes Int    @default(0)
   likes     Like[]
@@ -40,7 +51,8 @@ model Like {
   blog   Blog   @relation(fields: [blogId], references: [id])
   blogId String
 
-  authorId String
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -53,9 +65,8 @@ model Comment {
   blog   Blog   @relation(fields: [blogId], references: [id])
   blogId String
 
-  authorId   String
-  authorName String
-  authorImg  String
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
