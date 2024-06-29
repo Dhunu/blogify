@@ -8,13 +8,11 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(cuid()) @map("_id")
-  email    String @unique
-  name     String
-  password String
-  image    String
-  bio      String
-  role     String @default("USER")
+  id    String @id @default(cuid()) @map("_id")
+  email String @unique
+  name  String
+  image String
+  role  String @default("USER")
 
   blogs    Blog[]
   likes    Like[]
