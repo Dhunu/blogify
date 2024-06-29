@@ -18,8 +18,11 @@ model Blog {
   slug      String  @unique
   title     String
   content   String
-  authorId  String
   published Boolean @default(false)
+
+  authorId   String
+  authorName String
+  authorImg  String
 
   noOfLikes Int    @default(0)
   likes     Like[]
@@ -50,7 +53,9 @@ model Comment {
   blog   Blog   @relation(fields: [blogId], references: [id])
   blogId String
 
-  authorId String
+  authorId   String
+  authorName String
+  authorImg  String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

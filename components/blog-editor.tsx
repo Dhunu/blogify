@@ -60,7 +60,7 @@ const MenuBar = () => {
     };
 
     return (
-        <div className="w-full flex flex-wrap items-center justify-between lg:justify-start gap-5 border rounded-md py-2 px-5 rounded-b-none relative border-b-neutral-600 bg-black z-30">
+        <div className="w-full flex flex-wrap items-center justify-between lg:justify-start gap-5 border rounded-md py-2 px-5 rounded-b-none relative dark:border-b-neutral-600 border-b-neutral-400 dark:bg-black z-30">
             <button
                 type="button"
                 onClick={() =>
@@ -68,8 +68,8 @@ const MenuBar = () => {
                 }
                 className={
                     editor.isActive("heading", { level: 1 })
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-neutral-600 dark:text-neutral-300"
                 }
             >
                 <LuHeading1 />
@@ -81,8 +81,8 @@ const MenuBar = () => {
                 }
                 className={
                     editor.isActive("heading", { level: 2 })
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <LuHeading2 />
@@ -94,8 +94,8 @@ const MenuBar = () => {
                 }
                 className={
                     editor.isActive("heading", { level: 3 })
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <LuHeading3 />
@@ -108,8 +108,8 @@ const MenuBar = () => {
                 }
                 className={
                     editor.isActive({ textAlign: "left" })
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <GrTextAlignLeft />
@@ -121,8 +121,8 @@ const MenuBar = () => {
                 }
                 className={
                     editor.isActive({ textAlign: "center" })
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <GrTextAlignCenter />
@@ -134,8 +134,8 @@ const MenuBar = () => {
                 }
                 className={
                     editor.isActive({ textAlign: "right" })
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <GrTextAlignRight />
@@ -147,8 +147,8 @@ const MenuBar = () => {
                 }
                 className={
                     editor.isActive({ textAlign: "justify" })
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <GrTextAlignFull />
@@ -160,8 +160,8 @@ const MenuBar = () => {
                 disabled={!editor.can().chain().focus().toggleBold().run()}
                 className={
                     editor.isActive("superscript")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaSuperscript />
@@ -172,8 +172,8 @@ const MenuBar = () => {
                 disabled={!editor.can().chain().focus().toggleBold().run()}
                 className={
                     editor.isActive("subscript")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaSubscript />
@@ -184,8 +184,8 @@ const MenuBar = () => {
                 disabled={!editor.can().chain().focus().toggleBold().run()}
                 className={
                     editor.isActive("bold")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaBold />
@@ -196,8 +196,8 @@ const MenuBar = () => {
                 disabled={!editor.can().chain().focus().toggleItalic().run()}
                 className={
                     editor.isActive("italic")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaItalic />
@@ -208,8 +208,8 @@ const MenuBar = () => {
                 disabled={!editor.can().chain().focus().toggleStrike().run()}
                 className={
                     editor.isActive("strike")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaStrikethrough />
@@ -220,8 +220,8 @@ const MenuBar = () => {
                 disabled={!editor.can().chain().focus().toggleStrike().run()}
                 className={
                     editor.isActive("underline")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaUnderline />
@@ -232,8 +232,8 @@ const MenuBar = () => {
                 disabled={!editor.can().chain().focus().toggleCode().run()}
                 className={
                     editor.isActive("code")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaCode />
@@ -245,8 +245,8 @@ const MenuBar = () => {
                 onClick={() => editor.chain().focus().setParagraph().run()}
                 className={
                     editor.isActive("paragraph")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaParagraph />
@@ -257,8 +257,8 @@ const MenuBar = () => {
                 onClick={() => editor.chain().focus().toggleHighlight().run()}
                 className={
                     editor.isActive("highlight")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaHighlighter />
@@ -269,8 +269,8 @@ const MenuBar = () => {
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={
                     editor.isActive("bulletList")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaListUl />
@@ -280,8 +280,8 @@ const MenuBar = () => {
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={
                     editor.isActive("orderedList")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaListOl />
@@ -291,8 +291,8 @@ const MenuBar = () => {
                 onClick={() => editor.chain().focus().toggleCodeBlock().run()}
                 className={
                     editor.isActive("codeBlock")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <BiCodeBlock />
@@ -302,8 +302,8 @@ const MenuBar = () => {
                 onClick={() => editor.chain().focus().toggleBlockquote().run()}
                 className={
                     editor.isActive("blockquote")
-                        ? "p-1 bg-neutral-700 rounded-sm"
-                        : "p-1"
+                        ? "p-1 dark:bg-neutral-700 bg-neutral-200 rounded-sm"
+                        : "p-1 text-slate-600 dark:text-neutral-300"
                 }
             >
                 <FaQuoteLeft />
@@ -422,7 +422,7 @@ export default function BlogEditor({
             extensions={extensions}
             editorProps={{
                 attributes: {
-                    class: "bg-neutral-900 prose prose-invert max-w-none w-full border border-t-0 rounded-md rounded-t-none p-5 focus:outline-none  h-full min-h-20",
+                    class: "dark:bg-neutral-900 bg-neutral-50 text-neutral-800 dark:text-neutral-50 prose prose-invert max-w-none w-full border border-t-0 rounded-md rounded-t-none p-5 focus:outline-none h-full min-h-20",
                 },
             }}
         />

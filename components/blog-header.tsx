@@ -23,7 +23,7 @@ export default function BlogHeader({
 }) {
     const { userId } = auth();
     return (
-        <div className="flex gap-10 justify-between items-center sticky top-0 pt-5 bg-background">
+        <div className="flex gap-10 justify-between items-center sticky top-0 h-16 bg-background">
             <Breadcrumb>
                 <BreadcrumbList className="text-xl font-bold">
                     <BreadcrumbItem>

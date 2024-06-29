@@ -1,3 +1,4 @@
+import BlogFooter from "@/components/blog-footer";
 import BlogHeader from "@/components/blog-header";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
@@ -21,9 +22,10 @@ export default async function Blog({ params }: { params: { slug: string } }) {
                 title={data.blog.title}
                 slug={slug}
             />
-            <div className="prose prose-invert mt-10 mx-auto">
+            <div className="prose dark:prose-invert mt-10 mx-auto">
                 <MDXRemote source={markdown} />
             </div>
+            <BlogFooter />
         </div>
     );
 }

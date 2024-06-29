@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import ThemeSwitcher from "@/components/ui/theme-switcher";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useSession } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import React from "react";
