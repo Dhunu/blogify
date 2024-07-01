@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const CreateBlogSchema = z.object({
+    userId: z.string(),
     slug: z.string().min(3).max(100),
     title: z
         .string()

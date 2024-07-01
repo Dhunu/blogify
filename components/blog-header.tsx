@@ -1,4 +1,8 @@
-import React from "react";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
+import { FaRegHeart } from "react-icons/fa";
+
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -7,10 +11,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "./ui/breadcrumb";
-import { Pencil } from "lucide-react";
 import { Button } from "./ui/button";
-import Link from "next/link";
-import { auth } from "@clerk/nextjs/server";
 
 export default function BlogHeader({
     authorId,
@@ -36,12 +37,15 @@ export default function BlogHeader({
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            {userId === authorId && (
+
+            {userId === authorId ? (
                 <Link href={`/blog/${slug}/edit`}>
                     <Button size="sm">
                         <Pencil className="h-4 w-4" />
                     </Button>
                 </Link>
+            ) : (
+                <FaRegHeart className="h-5 w-5" />
             )}
         </div>
     );

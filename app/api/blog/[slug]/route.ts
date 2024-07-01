@@ -14,6 +14,27 @@ export async function GET(
         where: {
             slug,
         },
+        include: {
+            user: {
+                select: {
+                    name: true,
+                    image: true,
+                },
+            },
+            comments: {
+                select: {
+                    id: true,
+                    content: true,
+                    user: {
+                        select: {
+                            name: true,
+                            image: true,
+                        },
+                    },
+                    updatedAt: true,
+                },
+            },
+        },
     });
 
     // Check if blog exists

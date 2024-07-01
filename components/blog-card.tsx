@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 export default function BlogCard(blog: Blog & { className?: string }) {
     return (
@@ -17,8 +18,8 @@ export default function BlogCard(blog: Blog & { className?: string }) {
             />
             <div className="flex flex-col p-5">
                 <h1 className="text-xl font-bold line-clamp-1">{blog.title}</h1>
-                <p className="text-muted-foreground text-sm">
-                    {blog.content.substring(0, 100)}
+                <p className="text-sm text-muted-foreground line-clamp-3 h-16">
+                    {blog.description}
                 </p>
                 <Link href={`/blog/${blog.slug}`}>
                     <Button className="mt-5 font-semibold">

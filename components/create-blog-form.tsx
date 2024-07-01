@@ -20,36 +20,57 @@ import BlogEditor from "./blog-editor";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ArrowLeftIcon, Loader2 } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 export default function CreateBlogForm({
+    userId,
     type,
     blog,
 }: {
+    userId: string;
     type: "create" | "edit";
     blog?: Blog;
 }) {
     const [isPending, startTransition] = useTransition();
-
     const form = useForm<z.infer<typeof CreateBlogSchema>>({
         resolver: zodResolver(CreateBlogSchema),
         defaultValues: {
+            userId,
             title: blog?.title ?? "",
             description: blog?.description ?? "",
             slug: blog?.slug ?? "",
-            content: blog?.content ?? "",
+            content: blog?.content ?? "# Heading \n Content",
         },
     });
 
     useEffect(() => {
+        if (form.watch("content").startsWith("#")) {
+            form.setValue(
+                "title",
+                form.watch("content").split("\n")[0].replace("#", "").trim()
+            );
+        }
+    }, [form.watch("content")]);
+
+    useEffect(() => {
+        const desc = form
+            .watch("content")
+            .split("\n")
+            .filter((line) => !line.startsWith("#"))
+            .join(" ")
+            .substring(0, 100);
+
+        form.setValue("description", desc.replace(/[#*~-]/g, "").trim());
+    }, [form.watch("content")]);
+
+    useEffect(() => {
         form.setValue(
             "slug",
-            form.getValues("title").toLowerCase().replace(/\s/g, "-")
+            form.getValues("title").toLowerCase().replace(/[ .]/g, "-")
         );
     }, [form.watch("title"), form]);
 
     const onSubmit = (values: z.infer<typeof CreateBlogSchema>) => {
-        console.log(values);
-
         startTransition(async () => {
             const res = await fetch("/api/blog", {
                 method: "POST",
@@ -91,22 +112,7 @@ export default function CreateBlogForm({
                             )}
                         </Button>
                     </div>
-                    <FormField
-                        name="title"
-                        control={form.control}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Title</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        {...field}
-                                        placeholder="Title"
-                                        type="text"
-                                    />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
+
                     <FormField
                         name="description"
                         control={form.control}
@@ -114,22 +120,20 @@ export default function CreateBlogForm({
                             <FormItem>
                                 <FormLabel>Description</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        {...field}
-                                        placeholder="Description"
-                                        type="text"
-                                    />
+                                    <Input {...field} />
                                 </FormControl>
                             </FormItem>
                         )}
                     />
-                    <div className="space-y-2 relative">
-                        <Label>Content</Label>
-                        <div className="pb-10">
-                            <BlogEditor
-                                content={form.watch("content")}
-                                setContent={form.setValue.bind(null, "content")}
-                            />
+
+                    <div className="pb-10">
+                        <BlogEditor
+                            content={form.watch("content")}
+                            setContent={form.setValue.bind(null, "content")}
+                        />
+                        <div className="text-sm text-muted-foreground">
+                            Always type your heading in the first line of the
+                            content with H1
                         </div>
                     </div>
                 </form>

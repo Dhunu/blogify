@@ -1,31 +1,37 @@
-import BlogFooter from "@/components/blog-footer";
+import AboutBlog from "@/components/about-blog";
+import BlogFooter, { Comment } from "@/components/blog-footer";
 import BlogHeader from "@/components/blog-header";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 export default async function Blog({ params }: { params: { slug: string } }) {
     const { slug } = params;
 
-    const res = await fetch(
-        `${process.env.DEPLOYMENT_URL}/api/get-blog/${slug}`,
-        {
-            method: "GET",
-        }
-    );
+    const res = await fetch(`${process.env.DEPLOYMENT_URL}/api/blog/${slug}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        cache: "no-store",
+    });
 
     const data = await res.json();
-    const markdown = data.blog.content;
+    const blog = data.data;
+
+    const markdown = blog.content;
 
     return (
         <div className="flex flex-col gap-5 lg:gap-10 my-5">
-            <BlogHeader
-                authorId={data.blog.authorId}
-                title={data.blog.title}
-                slug={slug}
-            />
-            <div className="prose dark:prose-invert mt-10 mx-auto">
+            <BlogHeader authorId={blog.userId} title={blog.title} slug={slug} />
+
+            <div className="prose dark:prose-invert mx-auto">
+                <AboutBlog
+                    blog={blog}
+                    author={blog.user.name}
+                    authorImage={blog.user.image}
+                />
                 <MDXRemote source={markdown} />
+                <BlogFooter {...blog.comments} />
             </div>
-            <BlogFooter />
         </div>
     );
 }
