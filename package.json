@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npx prisma generate --schema=./prisma/schema.prisma"
+    "postinstall": "npx prisma generate"
+  },
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.1.6",
